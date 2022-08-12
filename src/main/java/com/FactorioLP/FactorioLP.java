@@ -523,7 +523,8 @@ public final class FactorioLP
 			UTILITY_SCIENCE_PACK
 	);
 	private static final double infinity = java.lang.Double.POSITIVE_INFINITY;
-	private static final int MAX_PRODUCERS = 300;
+	// only for testing
+	private static final double MAX_PRODUCERS = infinity;
 
 	private FactorioLP()
 	{
