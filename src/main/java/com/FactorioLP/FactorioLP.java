@@ -81,7 +81,6 @@ public final class FactorioLP
 	public static List<Item> getDependenciesRecursively(Item item)
 	{
 		List<Item> out = new ArrayList<>();
-		out.add(item);
 		Map<Item, Integer> ingredients = item.getIngredients();
 		if (ingredients == null)
 		{
@@ -158,15 +157,16 @@ public final class FactorioLP
 			return;
 		}
 
-		LinkedHashSet<Item> dependencies = new LinkedHashSet<>();
+		LinkedHashSet<Item> ItemSet = new LinkedHashSet<>();
 
 		for (Item item : Targets)
 		{
-			dependencies.addAll(getDependenciesRecursively(item));
+			ItemSet.add(item);
+			ItemSet.addAll(getDependenciesRecursively(item));
 		}
 
 		// initialize variables for each item
-		for (Item item : dependencies)
+		for (Item item : ItemSet)
 		{
 			item.setVariable(solver.makeIntVar(
 					0.0,
@@ -184,12 +184,12 @@ public final class FactorioLP
 				infinity,
 				"String"
 		);
-		for (Item item : dependencies)
+		for (Item item : ItemSet)
 		{
 			addItemConstraint(
 					solver,
 					item,
-					dependencies,
+					ItemSet,
 					waste
 			);
 		}
@@ -260,7 +260,7 @@ public final class FactorioLP
 				-1
 		);
 
-		for (Item item : dependencies)
+		for (Item item : ItemSet)
 		{
 			Producer producer = item.getProducer();
 			final double numProducedPerMinute = producer.getSpeed() * 60 / item.getTime();
@@ -320,7 +320,7 @@ public final class FactorioLP
 		{
 			System.out.println("SOLUTION:");
 			System.out.println("==============================");
-			for (Item item : dependencies)
+			for (Item item : ItemSet)
 			{
 				System.out.println(
 						item.getName() + " x" + (int) item.getNumProducers().solutionValue() +
