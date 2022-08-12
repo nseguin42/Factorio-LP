@@ -13,16 +13,16 @@ import java.util.Map;
 
 public final class FactorioLP
 {
-	// input rates
-	private static final double IRON_PER_MINUTE = 30 * 60 * 4;
-	private static final double COPPER_PER_MINUTE = 30 * 60 * 4;
-	private static final double COAL_PER_MINUTE = 30 * 60 * 2;
-	private static final double STONE_PER_MINUTE = 30 * 60 * 2;
-	private static final double PETROLEUM_GAS_PER_MINUTE = 3000 * 60;
-	private static final double WATER_PER_MINUTE = 3000 * 60;
-	private static final double LUBRICANT_PER_MINUTE = 3000 * 60;
 	private static final int BELT_SPEED = 30;
+	// input rates
+	private static final double IRON_PER_MINUTE = BELT_SPEED * 60 * 4;
+	private static final double COPPER_PER_MINUTE = BELT_SPEED * 60 * 4;
+	private static final double COAL_PER_MINUTE = BELT_SPEED * 60 * 2;
+	private static final double STONE_PER_MINUTE = BELT_SPEED * 60 * 2;
 	private static final int PIPE_SPEED = 3000;
+	private static final double PETROLEUM_GAS_PER_MINUTE = PIPE_SPEED * 60;
+	private static final double WATER_PER_MINUTE = PIPE_SPEED * 60;
+	private static final double LUBRICANT_PER_MINUTE = PIPE_SPEED * 60;
 	// item recipes
 	private static final Producer PRODUCER_ELECTRIC_FURNACE = new Producer(
 			2,
