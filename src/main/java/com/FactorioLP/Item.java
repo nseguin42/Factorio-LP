@@ -2,58 +2,58 @@ package com.FactorioLP;
 
 import com.google.ortools.linearsolver.MPVariable;
 import java.util.Map;
-public class Item
+public enum Item
 {
-	static final Item COPPER_PLATE = new Item(
+	COPPER_PLATE(
 			"Copper Plate",
 			null,
 			Producer.BELT_SPEED,
 			1,
 			Producer.BLUE_BELT
-	);
-	static final Item IRON_PLATE = new Item(
+	),
+	IRON_PLATE(
 			"Iron Plate",
 			null,
 			Producer.BELT_SPEED,
 			1,
 			Producer.BLUE_BELT
-	);
-	static final Item COAL = new Item(
+	),
+	COAL(
 			"Coal",
 			null,
 			1,
 			0,
 			Producer.BLUE_BELT
-	);
-	static final Item STONE = new Item(
+	),
+	STONE(
 			"Stone",
 			null,
 			10,
 			0,
 			Producer.BLUE_BELT
-	);
-	static final Item PETROLEUM_GAS = new Item(
+	),
+	PETROLEUM_GAS(
 			"Petroleum Gas",
 			null,
 			1,
 			0,
 			Producer.PIPE
-	);
-	static final Item WATER = new Item(
+	),
+	WATER(
 			"Water",
 			null,
 			1,
 			0,
 			Producer.PIPE
-	);
-	static final Item LUBRICANT = new Item(
+	),
+	LUBRICANT(
 			"Lubricant",
 			null,
 			1,
 			0,
 			Producer.PIPE
-	);
-	private static final Item COPPER_CABLE = new Item(
+	),
+	COPPER_CABLE(
 			"Copper Cable",
 			Map.of(
 					COPPER_PLATE,
@@ -62,8 +62,8 @@ public class Item
 			2,
 			0.5,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item ELECTRONIC_CIRCUIT = new Item(
+	),
+	ELECTRONIC_CIRCUIT(
 			"Electronic Circuit",
 			Map.of(
 					COPPER_CABLE,
@@ -74,8 +74,8 @@ public class Item
 			1,
 			0.5,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item IRON_STICK = new Item(
+	),
+	IRON_STICK(
 			"Iron Stick",
 			Map.of(
 					IRON_PLATE,
@@ -84,8 +84,8 @@ public class Item
 			2,
 			0.5,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item PIPE = new Item(
+	),
+	PIPE(
 			"Pipe",
 			Map.of(
 					IRON_PLATE,
@@ -94,8 +94,8 @@ public class Item
 			1,
 			0.5,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item STEEL = new Item(
+	),
+	STEEL(
 			"Steel",
 			Map.of(
 					IRON_PLATE,
@@ -104,8 +104,8 @@ public class Item
 			1,
 			16,
 			Producer.ELECTRIC_FURNACE
-	);
-	private static final Item RAIL = new Item(
+	),
+	RAIL(
 			"Rail",
 			Map.of(
 					IRON_STICK,
@@ -118,8 +118,8 @@ public class Item
 			2,
 			0.5,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item FIREARM_MAGAZINE = new Item(
+	),
+	FIREARM_MAGAZINE(
 			"Firearm Magazine",
 			Map.of(
 					IRON_PLATE,
@@ -128,8 +128,8 @@ public class Item
 			1,
 			1,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item PIERCING_ROUNDS_MAGAZINE = new Item(
+	),
+	PIERCING_ROUNDS_MAGAZINE(
 			"Piercing Rounds Magazine",
 			Map.of(
 					COPPER_PLATE,
@@ -142,8 +142,8 @@ public class Item
 			1,
 			3,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item IRON_GEAR_WHEEL = new Item(
+	),
+	IRON_GEAR_WHEEL(
 			"Iron Gear Wheel",
 			Map.of(
 					IRON_PLATE,
@@ -152,8 +152,8 @@ public class Item
 			1,
 			0.5,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item ENGINE_UNIT = new Item(
+	),
+	ENGINE_UNIT(
 			"Engine Unit",
 			Map.of(
 					IRON_GEAR_WHEEL,
@@ -166,8 +166,8 @@ public class Item
 			1,
 			10,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item ELECTRIC_ENGINE_UNIT = new Item(
+	),
+	ELECTRIC_ENGINE_UNIT(
 			"Electric Engine Unit",
 			Map.of(
 					ELECTRONIC_CIRCUIT,
@@ -180,8 +180,8 @@ public class Item
 			1,
 			10,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item INSERTER = new Item(
+	),
+	INSERTER(
 			"Inserter",
 			Map.of(
 					ELECTRONIC_CIRCUIT,
@@ -192,8 +192,8 @@ public class Item
 			1,
 			0.5,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item TRANSPORT_BELT = new Item(
+	),
+	TRANSPORT_BELT(
 			"Transport Belt",
 			Map.of(
 					IRON_GEAR_WHEEL,
@@ -204,8 +204,8 @@ public class Item
 			2,
 			0.5,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	static final Item LOGISTIC_SCIENCE_PACK = new Item(
+	),
+	LOGISTIC_SCIENCE_PACK(
 			"Logistic Science Pack",
 			Map.of(
 					TRANSPORT_BELT,
@@ -216,8 +216,8 @@ public class Item
 			1,
 			6,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	static final Item AUTOMATION_SCIENCE_PACK = new Item(
+	),
+	AUTOMATION_SCIENCE_PACK(
 			"Automation Science Pack",
 			Map.of(
 					IRON_GEAR_WHEEL,
@@ -228,8 +228,8 @@ public class Item
 			1,
 			5,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item GRENADE = new Item(
+	),
+	GRENADE(
 			"Grenade",
 			Map.of(
 					COAL,
@@ -240,8 +240,8 @@ public class Item
 			1,
 			8,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item STONE_BRICK = new Item(
+	),
+	STONE_BRICK(
 			"Stone Brick",
 			Map.of(
 					STONE,
@@ -250,8 +250,8 @@ public class Item
 			1,
 			3.2,
 			Producer.ELECTRIC_FURNACE
-	);
-	private static final Item WALL = new Item(
+	),
+	WALL(
 			"Wall",
 			Map.of(
 					STONE_BRICK,
@@ -260,8 +260,8 @@ public class Item
 			1,
 			0.5,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	static final Item MILITARY_SCIENCE_PACK = new Item(
+	),
+	MILITARY_SCIENCE_PACK(
 			"Military Science Pack",
 			Map.of(
 					PIERCING_ROUNDS_MAGAZINE,
@@ -274,8 +274,8 @@ public class Item
 			2,
 			10,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item PLASTIC_BAR = new Item(
+	),
+	PLASTIC_BAR(
 			"Plastic Bar",
 			Map.of(
 					COAL,
@@ -286,8 +286,8 @@ public class Item
 			2,
 			1,
 			Producer.CHEMICAL_PLANT
-	);
-	private static final Item LOW_DENSITY_STRUCTURE = new Item(
+	),
+	LOW_DENSITY_STRUCTURE(
 			"Low Density Structure",
 			Map.of(
 					COPPER_PLATE,
@@ -300,8 +300,8 @@ public class Item
 			1,
 			20,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item ADVANCED_CIRCUIT = new Item(
+	),
+	ADVANCED_CIRCUIT(
 			"Advanced Circuit",
 			Map.of(
 					COPPER_CABLE,
@@ -314,8 +314,8 @@ public class Item
 			1,
 			6,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item PRODUCTIVITY_MODULE = new Item(
+	),
+	PRODUCTIVITY_MODULE(
 			"Productivity Module",
 			Map.of(
 					ADVANCED_CIRCUIT,
@@ -326,8 +326,8 @@ public class Item
 			1,
 			15,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item ELECTRIC_FURNACE = new Item(
+	),
+	ELECTRIC_FURNACE(
 			"Electric Furnace",
 			Map.of(
 					ADVANCED_CIRCUIT,
@@ -340,8 +340,8 @@ public class Item
 			1,
 			5,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	static final Item PRODUCTION_SCIENCE_PACK = new Item(
+	),
+	PRODUCTION_SCIENCE_PACK(
 			"Production Science Pack",
 			Map.of(
 					RAIL,
@@ -354,8 +354,8 @@ public class Item
 			3,
 			21,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item SULFUR = new Item(
+	),
+	SULFUR(
 			"Sulfur",
 			Map.of(
 					PETROLEUM_GAS,
@@ -366,8 +366,8 @@ public class Item
 			2,
 			1,
 			Producer.CHEMICAL_PLANT
-	);
-	private static final Item SULFURIC_ACID = new Item(
+	),
+	SULFURIC_ACID(
 			"Sulfuric Acid",
 			Map.of(
 					IRON_PLATE,
@@ -380,8 +380,8 @@ public class Item
 			50,
 			1,
 			Producer.CHEMICAL_PLANT
-	);
-	private static final Item BATTERY = new Item(
+	),
+	BATTERY(
 			"Battery",
 			Map.of(
 					COPPER_PLATE,
@@ -394,8 +394,8 @@ public class Item
 			1,
 			4,
 			Producer.CHEMICAL_PLANT
-	);
-	private static final Item FLYING_ROBOT_FRAME = new Item(
+	),
+	FLYING_ROBOT_FRAME(
 			"Flying Robot Frame",
 			Map.of(
 					BATTERY,
@@ -410,8 +410,8 @@ public class Item
 			1,
 			20,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	private static final Item PROCESSING_UNIT = new Item(
+	),
+	PROCESSING_UNIT(
 			"Processing Unit",
 			Map.of(
 					ADVANCED_CIRCUIT,
@@ -424,8 +424,8 @@ public class Item
 			1,
 			10,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	static final Item UTILITY_SCIENCE_PACK = new Item(
+	),
+	UTILITY_SCIENCE_PACK(
 			"Utility Science Pack",
 			Map.of(
 					PROCESSING_UNIT,
@@ -438,8 +438,8 @@ public class Item
 			3,
 			21,
 			Producer.ASSEMBLY_MACHINE_3
-	);
-	static final Item CHEMICAL_SCIENCE_PACK = new Item(
+	),
+	CHEMICAL_SCIENCE_PACK(
 			"Chemical Science Pack",
 			Map.of(
 					SULFUR,
@@ -453,6 +453,7 @@ public class Item
 			24,
 			Producer.ASSEMBLY_MACHINE_3
 	);
+
 	final private Map<Item, Integer> ingredients;
 	final private double time;
 	final private Producer producer;
@@ -461,10 +462,7 @@ public class Item
 	private MPVariable variable;
 	private MPVariable numProducers;
 
-	public Item(
-			String name, Map<Item, Integer> ingredients, int quantity, double time,
-			Producer producer
-	)
+	Item(String name, Map<Item, Integer> ingredients, int quantity, double time, Producer producer)
 	{
 		this.name = name;
 		this.ingredients = ingredients;

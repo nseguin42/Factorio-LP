@@ -1,43 +1,19 @@
 package com.FactorioLP;
 
-import com.google.ortools.linearsolver.MPVariable;
-public class Producer
+public enum Producer
 {
-	static final int PIPE_SPEED = 3000;
-	public static final Producer PIPE = new Producer(
-			PIPE_SPEED,
-			0,
-			"Pipe"
-	);
-	static final Producer BLUE_BELT = new Producer(
-			PIPE_SPEED,
-			0,
-			"Red Belt"
-	);
-	static final Producer ELECTRIC_FURNACE = new Producer(
-			2,
-			2,
-			"Electric Furnace"
-	);
-	static final Producer CHEMICAL_PLANT = new Producer(
-			1,
-			3,
-			"Chemical Plant"
-	);
-	static final Producer ASSEMBLY_MACHINE_3 = new Producer(
-			1.25,
-			4,
-			"Assembly Machine 3"
-	);
+	PIPE(3000, 0, "Pipe"),
+	BLUE_BELT(45, 0, "Blue Belt"),
+	ELECTRIC_FURNACE(2, 2, "Electric Furnace"),
+	CHEMICAL_PLANT(1, 3, "Chemical Plant"),
+	ASSEMBLY_MACHINE_3(1.25, 4, "Assembly Machine 3");
 	static final int BELT_SPEED = 45;
 	private static final double SPEED_MODULE_MULTIPLIER = 0.5;
+	final double speed;
+	final int slots;
+	final String name;
 
-	double speed;
-	int slots;
-	MPVariable variable;
-	String name;
-
-	public Producer(double speed, int slots, String name)
+	Producer(double speed, int slots, String name)
 	{
 		this.speed = speed;
 		this.slots = slots;
@@ -53,4 +29,5 @@ public class Producer
 	{
 		return this.name;
 	}
+
 }
