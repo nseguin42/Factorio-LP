@@ -1,9 +1,12 @@
 package com.FactorioLP;
 
-import java.awt.Color;
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.intellijthemes.FlatNordIJTheme;
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
@@ -20,11 +23,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextPane;
 import javax.swing.JToolBar;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
@@ -32,6 +37,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.text.StyleContext;
 public class GUI
 {
+	static List<String> itemConstraintsText = new ArrayList<>();
+	static List<String> supplyConstraintsText = new ArrayList<>();
+	static List<String> targetConstraintsText = new ArrayList<>();
+	static List<String> productionConstraintsText = new ArrayList<>();
+	static List<String> sourceText = new ArrayList<>();
+	static List<String> solutionText = new ArrayList<>();
+	static List<String> spmText = new ArrayList<>();
+	static ArrayList<Object[]> solutionMatrix = new ArrayList<>();
 	private JPanel panelMain;
 	private JTextPane paneOutput1;
 	private JTextPane paneItemConstraints;
@@ -43,37 +56,41 @@ public class GUI
 	private JSplitPane splitPaneSPM;
 	private JTextPane paneProductionConstraints;
 	private JPanel panelItemList;
-	private JScrollPane scrollPaneItemList;
 	private JTable table1;
 	private JButton button1;
 	private JButton button2;
-	private JTextPane textPane1;
+	private JSpinner spinner1;
+	private JScrollPane scrollPaneItemList;
 
 	public GUI()
 	{
 		$$$setupUI$$$();
 		makeCheckBoxes();
 		makeSolveButton();
+		spinner1.addChangeListener(ChangeListener -> {
+			int value = (int) spinner1.getValue();
+			spinner1.setValue(value);
+			System.out.println(value);
+		});
 	}
 
 	public static void main(String[] args)
 	{
+		try
+		{
+			FlatNordIJTheme.setup();
+		}
+		catch (Exception ex)
+		{
+			System.err.println("Failed to initialize LaF");
+		}
+
 		JFrame frame = new JFrame("GUI");
 		frame.setContentPane(new GUI().panelMain);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
 	}
-
-	static List<String> itemConstraintsText = new ArrayList<>();
-	static List<String> supplyConstraintsText = new ArrayList<>();
-	static List<String> targetConstraintsText = new ArrayList<>();
-	static List<String> productionConstraintsText = new ArrayList<>();
-	static List<String> sourceText = new ArrayList<>();
-	static List<String> solutionText = new ArrayList<>();
-	static List<String> spmText = new ArrayList<>();
-
-	static ArrayList<Object[]> solutionMatrix = new ArrayList<>();
 
 	public static void updateTextStrings(List<String>[] arr)
 	{
@@ -171,11 +188,7 @@ public class GUI
 	{
 		createUIComponents();
 		panelMain = new JPanel();
-		panelMain.setLayout(
-				new com.intellij.uiDesigner.core.GridLayoutManager(3, 1, new Insets(0, 0, 0, 0),
-						-1,
-						-1
-				));
+		panelMain.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
 		Font panelMainFont = UIManager.getFont("TextPane.font");
 		if (panelMainFont != null)
 		{
@@ -185,12 +198,9 @@ public class GUI
 		toolBar1.setBorderPainted(true);
 		toolBar1.setEnabled(true);
 		toolBar1.setFloatable(false);
-		panelMain.add(toolBar1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1,
-				com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-				com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null,
-				new Dimension(-1, 20), null, 0, false
+		panelMain.add(toolBar1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER,
+				GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW,
+				GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 20), null, 0, false
 		));
 		toolBar1.setBorder(
 				BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "FactorioLP",
@@ -198,25 +208,24 @@ public class GUI
 						this.$$$getFont$$$("Inter", -1, 16, toolBar1.getFont()), null
 				));
 		final JSplitPane splitPane1 = new JSplitPane();
-		splitPane1.setContinuousLayout(false);
-		splitPane1.setDividerLocation(227);
-		splitPane1.setDividerSize(4);
+		splitPane1.setContinuousLayout(true);
+		splitPane1.setDividerLocation(250);
+		splitPane1.setDividerSize(0);
+		splitPane1.setEnabled(false);
 		splitPane1.setOneTouchExpandable(false);
-		panelMain.add(splitPane1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1,
-				com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-				com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null,
-				null, null, 0, false
+		panelMain.add(splitPane1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER,
+				GridConstraints.FILL_BOTH,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW,
+				new Dimension(400, 400), null, null, 1, false
 		));
-		final JPanel panel1 = new JPanel();
-		panel1.setLayout(
-				new com.intellij.uiDesigner.core.GridLayoutManager(3, 1, new Insets(0, 0, 0, 0),
-						-1,
-						-1
+		splitPane1.setBorder(
+				BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), null,
+						TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null,
+						null
 				));
+		final JPanel panel1 = new JPanel();
+		panel1.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
 		splitPane1.setRightComponent(panel1);
 		panel1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLoweredBevelBorder(),
 				"Solution", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION,
@@ -224,18 +233,16 @@ public class GUI
 				null
 		));
 		splitPaneSPM = new JSplitPane();
-		splitPaneSPM.setDividerLocation(150);
+		splitPaneSPM.setDividerLocation(140);
 		splitPaneSPM.setDividerSize(0);
 		splitPaneSPM.setEnabled(false);
 		splitPaneSPM.setOneTouchExpandable(false);
 		splitPaneSPM.setOrientation(1);
 		splitPaneSPM.setResizeWeight(0.0);
-		panel1.add(splitPaneSPM, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1,
-				com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST,
-				com.intellij.uiDesigner.core.GridConstraints.FILL_NONE,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, 1, null,
-				new Dimension(250, -1), new Dimension(250, -1), 0, false
+		panel1.add(splitPaneSPM, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST,
+				GridConstraints.FILL_NONE,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, 1,
+				null, new Dimension(250, -1), new Dimension(250, -1), 0, false
 		));
 		final JLabel label1 = new JLabel();
 		label1.setHorizontalAlignment(0);
@@ -247,15 +254,17 @@ public class GUI
 		paneSPM.setEditable(false);
 		splitPaneSPM.setRightComponent(paneSPM);
 		final JScrollPane scrollPane1 = new JScrollPane();
-		panel1.add(scrollPane1, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1,
-				com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-				com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null,
+		panel1.add(scrollPane1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER,
+				GridConstraints.FILL_BOTH,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null,
 				null, null, 0, false
 		));
+		scrollPane1.setBorder(
+				BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), null,
+						TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null,
+						null
+				));
 		table1.setAutoCreateRowSorter(true);
 		table1.setAutoResizeMode(1);
 		table1.setEnabled(false);
@@ -265,113 +274,98 @@ public class GUI
 		buttonSolve.setText("Solve");
 		buttonSolve.setMnemonic('S');
 		buttonSolve.setDisplayedMnemonicIndex(0);
-		panel1.add(buttonSolve, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1,
-				com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST,
-				com.intellij.uiDesigner.core.GridConstraints.FILL_NONE,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null,
-				new Dimension(100, -1), new Dimension(100, -1), 0, false
+		panel1.add(buttonSolve, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_EAST,
+				GridConstraints.FILL_NONE,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+				GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(100, -1),
+				new Dimension(100, -1), 0, false
 		));
 		final JTabbedPane tabbedPane1 = new JTabbedPane();
 		tabbedPane1.setTabLayoutPolicy(0);
 		splitPane1.setLeftComponent(tabbedPane1);
-		tabbedPane1.setBorder(
-				BorderFactory.createTitledBorder(BorderFactory.createLoweredBevelBorder(), null,
-						TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null,
-						null
-				));
 		scrollPaneItemList = new JScrollPane();
 		scrollPaneItemList.setHorizontalScrollBarPolicy(30);
 		scrollPaneItemList.setVerticalScrollBarPolicy(20);
 		tabbedPane1.addTab("Targets", scrollPaneItemList);
-		scrollPaneItemList.setBorder(
-				BorderFactory.createTitledBorder(BorderFactory.createLoweredBevelBorder(), null,
-						TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null,
-						null
-				));
 		panelItemList = new JPanel();
 		panelItemList.setLayout(new GridBagLayout());
 		panelItemList.setMaximumSize(new Dimension(2147483647, 2147483647));
-		panelItemList.setMinimumSize(new Dimension(0, 50));
+		panelItemList.setMinimumSize(new Dimension(0, 250));
 		scrollPaneItemList.setViewportView(panelItemList);
-		panelItemList.setBorder(BorderFactory.createTitledBorder(
-				BorderFactory.createLineBorder(new Color(-1249292)), null,
-				TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null
-		));
-		final JPanel panel2 = new JPanel();
-		panel2.setLayout(
-				new com.intellij.uiDesigner.core.GridLayoutManager(2, 1, new Insets(0, 0, 0, 0),
-						-1,
-						-1
+		panelItemList.setBorder(
+				BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), null,
+						TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null,
+						null
 				));
+		final JPanel panel2 = new JPanel();
+		panel2.setLayout(new GridLayoutManager(2, 1, new Insets(0, 0, 0, 0), -1, -1));
 		tabbedPane1.addTab("Supply", panel2);
 		final JScrollPane scrollPane2 = new JScrollPane();
-		panel2.add(scrollPane2, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1,
-				com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-				com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null,
+		panel2.add(scrollPane2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER,
+				GridConstraints.FILL_BOTH,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null,
 				null, null, 0, false
 		));
-		final JPanel panel3 = new JPanel();
-		panel3.setLayout(
-				new com.intellij.uiDesigner.core.GridLayoutManager(1, 1, new Insets(0, 0, 0, 0),
-						-1,
-						-1
+		scrollPane2.setBorder(
+				BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), null,
+						TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null,
+						null
 				));
+		final JPanel panel3 = new JPanel();
+		panel3.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
 		scrollPane2.setViewportView(panel3);
-		textPane1 = new JTextPane();
-		panel3.add(textPane1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1,
-				com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-				com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null,
-				new Dimension(150, 50), null, 0, false
+		panel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), null,
+				TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null
 		));
 		final JSplitPane splitPane2 = new JSplitPane();
-		splitPane2.setResizeWeight(0.0);
-		panel2.add(splitPane2, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1,
-				com.intellij.uiDesigner.core.GridConstraints.ANCHOR_SOUTH,
-				com.intellij.uiDesigner.core.GridConstraints.FILL_NONE,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null,
+		splitPane2.setDividerLocation(117);
+		splitPane2.setDividerSize(0);
+		splitPane2.setEnabled(false);
+		splitPane2.setResizeWeight(0.9);
+		panel3.add(splitPane2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER,
+				GridConstraints.FILL_HORIZONTAL,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null,
+				null, null, 0, false
+		));
+		final JLabel label2 = new JLabel();
+		label2.setText("Iron Plates");
+		splitPane2.setLeftComponent(label2);
+		splitPane2.setRightComponent(spinner1);
+		final Spacer spacer1 = new Spacer();
+		panel3.add(spacer1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER,
+				GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null,
+				null, 0, false
+		));
+		final JSplitPane splitPane3 = new JSplitPane();
+		splitPane3.setResizeWeight(0.0);
+		panel2.add(splitPane3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_SOUTH,
+				GridConstraints.FILL_NONE,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null,
 				null, null, 0, false
 		));
 		button1 = new JButton();
 		button1.setHorizontalAlignment(0);
 		button1.setText("Button");
-		splitPane2.setLeftComponent(button1);
+		splitPane3.setLeftComponent(button1);
 		button2 = new JButton();
 		button2.setText("Button");
-		splitPane2.setRightComponent(button2);
+		splitPane3.setRightComponent(button2);
 		final JPanel panel4 = new JPanel();
-		panel4.setLayout(
-				new com.intellij.uiDesigner.core.GridLayoutManager(3, 1, new Insets(0, 0, 0, 0),
-						-1,
-						-1
-				));
-		panelMain.add(panel4, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1,
-				com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-				com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null,
+		panel4.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
+		panelMain.add(panel4, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER,
+				GridConstraints.FILL_BOTH,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null,
 				new Dimension(-1, 400), null, 1, false
 		));
 		final JScrollPane scrollPane3 = new JScrollPane();
-		panel4.add(scrollPane3, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1,
-				com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-				com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null,
+		panel4.add(scrollPane3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER,
+				GridConstraints.FILL_BOTH,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null,
 				null, null, 0, false
 		));
 		scrollPane3.setBorder(BorderFactory.createTitledBorder(null, "Item Constraints",
@@ -389,19 +383,17 @@ public class GUI
 		paneItemConstraints.setText("");
 		scrollPane3.setViewportView(paneItemConstraints);
 		final JScrollPane scrollPane4 = new JScrollPane();
-		panel4.add(scrollPane4, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1,
-				com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-				com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null,
+		panel4.add(scrollPane4, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER,
+				GridConstraints.FILL_BOTH,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null,
 				null, null, 0, false
 		));
 		scrollPane4.setBorder(BorderFactory.createTitledBorder(null, "Production Constraints",
 				TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null
 		));
 		paneProductionConstraints = new JTextPane();
+		paneProductionConstraints.setEditable(false);
 		Font paneProductionConstraintsFont = this.$$$getFont$$$("Iosevka", -1, 12,
 				paneProductionConstraints.getFont()
 		);
@@ -411,13 +403,10 @@ public class GUI
 		}
 		scrollPane4.setViewportView(paneProductionConstraints);
 		final JScrollPane scrollPane5 = new JScrollPane();
-		panel4.add(scrollPane5, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1,
-				com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER,
-				com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW,
-				com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK |
-						com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null,
+		panel4.add(scrollPane5, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER,
+				GridConstraints.FILL_BOTH,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW,
+				GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null,
 				null, null, 0, false
 		));
 		scrollPane5.setBorder(BorderFactory.createTitledBorder(null, "Supply Constraints",
@@ -485,8 +474,13 @@ public class GUI
 
 	private void createUIComponents()
 	{
+		// create solution pane
 		String[] columnNames = {"Item", "# of Producers", "Units per Minute"};
 		DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 		table1 = new JTable(tableModel);
+
+		// create supply spinners
+		SpinnerNumberModel spinnerModel = new SpinnerNumberModel(1, 0, 999, 1);
+		spinner1 = new JSpinner(spinnerModel);
 	}
 }

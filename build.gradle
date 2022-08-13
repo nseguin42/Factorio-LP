@@ -11,11 +11,15 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
 
-// https://mvnrepository.com/artifact/com.google.ortools/ortools-java
+    // https://mvnrepository.com/artifact/com.google.ortools/ortools-java
     implementation group: 'com.google.ortools', name: 'ortools-java', version: '9.3.10497'
 
     // https://mvnrepository.com/artifact/com.intellij/forms_rt
     implementation group: 'com.intellij', name: 'forms_rt', version: '7.0.3'
+
+    // https://www.formdev.com/flatlaf
+    implementation group: 'com.formdev', name: 'flatlaf', version: '2.4'
+    implementation group: 'com.formdev', name: 'flatlaf-intellij-themes', version: '2.4'
 }
 
 apply plugin: 'groovy'
@@ -39,5 +43,7 @@ shadowJar {
     archiveBaseName.set('FactorioLP-Shadow')
     archiveClassifier.set('')
     archiveVersion.set('')
-    minimize()
+    minimize() {
+        exclude (dependency('com.formdev:flatlaf'))
+    }
 }
