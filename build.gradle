@@ -7,11 +7,13 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
 
 // https://mvnrepository.com/artifact/com.google.ortools/ortools-java
     implementation group: 'com.google.ortools', name: 'ortools-java', version: '9.3.10497'
 
+    // https://mvnrepository.com/artifact/com.intellij/forms_rt
+    implementation group: 'com.intellij', name: 'forms_rt', version: '7.0.3'
 }
 
 apply plugin: 'groovy'
@@ -22,4 +24,10 @@ application {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.FactorioLP.GUI'
+    }
 }
