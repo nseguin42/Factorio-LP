@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.FactorioLP.GUI">
-  <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="726" height="866"/>
@@ -21,14 +21,14 @@
           <enabled value="true"/>
           <floatable value="false"/>
         </properties>
-        <border type="empty" title="FactorioLP">
-          <font name="Inter" size="16"/>
+        <border type="empty" title="FactorioLP" title-justification="4" title-position="5">
+          <font size="14"/>
         </border>
         <children/>
       </toolbar>
       <splitpane id="fa01a">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="1" use-parent-layout="false">
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <minimum-size width="400" height="400"/>
           </grid>
         </constraints>
@@ -39,7 +39,7 @@
           <enabled value="false"/>
           <oneTouchExpandable value="false"/>
         </properties>
-        <border type="empty"/>
+        <border type="none"/>
         <children>
           <grid id="d36e7" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
@@ -47,7 +47,7 @@
               <splitpane position="right"/>
             </constraints>
             <properties/>
-            <border type="bevel-lowered" title="Solution"/>
+            <border type="none" title="Solution"/>
             <children>
               <splitpane id="df9ed" binding="splitPaneSPM">
                 <constraints>
@@ -95,28 +95,16 @@
                 <properties/>
                 <border type="empty"/>
                 <children>
-                  <component id="3a6ef" class="javax.swing.JTable" binding="table1" custom-create="true" default-binding="true">
+                  <component id="3a6ef" class="javax.swing.JTable" binding="tableSolution" custom-create="true" default-binding="true">
                     <constraints/>
                     <properties>
                       <autoCreateRowSorter value="true"/>
-                      <autoResizeMode value="1"/>
+                      <autoResizeMode value="2"/>
                       <enabled value="false"/>
                     </properties>
                   </component>
                 </children>
               </scrollpane>
-              <component id="cb85f" class="javax.swing.JButton" binding="buttonSolve">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false">
-                    <preferred-size width="100" height="-1"/>
-                    <maximum-size width="100" height="-1"/>
-                  </grid>
-                </constraints>
-                <properties>
-                  <horizontalAlignment value="0"/>
-                  <text value="&amp;Solve"/>
-                </properties>
-              </component>
             </children>
           </grid>
           <tabbedpane id="99d6">
@@ -125,36 +113,110 @@
             </constraints>
             <properties>
               <tabLayoutPolicy value="0"/>
+              <tabPlacement value="1"/>
             </properties>
             <border type="none"/>
             <children>
-              <scrollpane id="eac4d" binding="scrollPaneItemList">
+              <grid id="773f4" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <tabbedpane title="Targets"/>
                 </constraints>
-                <properties>
-                  <horizontalScrollBarPolicy value="30"/>
-                  <verticalScrollBarPolicy value="20"/>
-                </properties>
+                <properties/>
                 <border type="none"/>
                 <children>
-                  <grid id="30736" binding="panelItemList" layout-manager="GridBagLayout">
-                    <constraints/>
-                    <properties>
-                      <maximumSize width="2147483647" height="2147483647"/>
-                      <minimumSize width="0" height="250"/>
-                    </properties>
-                    <border type="empty">
-                      <color color="-1249292"/>
-                    </border>
-                    <children/>
+                  <scrollpane id="72f9f">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="empty"/>
+                    <children>
+                      <component id="f1938" class="javax.swing.JTable" binding="tableTarget" custom-create="true">
+                        <constraints/>
+                        <properties>
+                          <autoCreateRowSorter value="true"/>
+                          <enabled value="false"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <grid id="4fdf1" binding="panelAddNewTarget" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties/>
+                    <border type="none" title="Set Target"/>
+                    <children>
+                      <component id="59bff" class="javax.swing.JComboBox" binding="comboBoxTarget" custom-create="true">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties/>
+                      </component>
+                      <splitpane id="5abb4" binding="splitTargetSpinner">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false">
+                            <preferred-size width="200" height="10"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <dividerLocation value="125"/>
+                          <dividerSize value="0"/>
+                          <enabled value="false"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="fae9" class="javax.swing.JLabel">
+                            <constraints>
+                              <splitpane position="left"/>
+                            </constraints>
+                            <properties>
+                              <horizontalTextPosition value="10"/>
+                              <text value="Priority"/>
+                            </properties>
+                          </component>
+                          <component id="a949a" class="javax.swing.JSpinner" binding="spinnerTargetPriority" custom-create="true">
+                            <constraints>
+                              <splitpane position="right"/>
+                            </constraints>
+                            <properties/>
+                          </component>
+                        </children>
+                      </splitpane>
+                      <component id="63c14" class="javax.swing.JButton" binding="buttonSetTarget">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Set"/>
+                        </properties>
+                      </component>
+                      <component id="cf9e6" class="javax.swing.JButton" binding="buttonRemoveTarget">
+                        <constraints>
+                          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Remove"/>
+                        </properties>
+                      </component>
+                    </children>
                   </grid>
+                  <component id="83ff8" class="javax.swing.JButton" binding="clearTargetsButton" default-binding="true">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Clear All"/>
+                    </properties>
+                  </component>
                 </children>
-              </scrollpane>
-              <grid id="cc6ff" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              </grid>
+              <grid id="cc6ff" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
-                  <tabbedpane title="Supply"/>
+                  <tabbedpane title="Supplies"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -163,90 +225,113 @@
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <enabled value="false"/>
+                    </properties>
                     <border type="empty"/>
                     <children>
-                      <grid id="15c22" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                        <margin top="0" left="0" bottom="0" right="0"/>
+                      <component id="b9188" class="javax.swing.JTable" binding="tableSupplies" custom-create="true">
                         <constraints/>
-                        <properties/>
-                        <border type="empty"/>
-                        <children>
-                          <splitpane id="43bb0">
-                            <constraints>
-                              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                            </constraints>
-                            <properties>
-                              <dividerLocation value="117"/>
-                              <dividerSize value="0"/>
-                              <enabled value="false"/>
-                              <resizeWeight value="0.9"/>
-                            </properties>
-                            <border type="none"/>
-                            <children>
-                              <component id="67b39" class="javax.swing.JLabel">
-                                <constraints>
-                                  <splitpane position="left"/>
-                                </constraints>
-                                <properties>
-                                  <text value="Iron Plates"/>
-                                </properties>
-                              </component>
-                              <component id="cb70" class="javax.swing.JSpinner" binding="spinner1" custom-create="true" default-binding="true">
-                                <constraints>
-                                  <splitpane position="right"/>
-                                </constraints>
-                                <properties/>
-                              </component>
-                            </children>
-                          </splitpane>
-                          <vspacer id="6274b">
-                            <constraints>
-                              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                            </constraints>
-                          </vspacer>
-                        </children>
-                      </grid>
+                        <properties>
+                          <autoCreateRowSorter value="true"/>
+                          <enabled value="false"/>
+                          <showHorizontalLines value="false"/>
+                        </properties>
+                      </component>
                     </children>
                   </scrollpane>
-                  <splitpane id="ccac2">
+                  <grid id="22280" binding="panelAddNewSupply" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="2" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties>
-                      <resizeWeight value="0.0"/>
-                    </properties>
-                    <border type="none"/>
+                    <properties/>
+                    <border type="none" title="Set Supply"/>
                     <children>
-                      <component id="689d" class="javax.swing.JButton" binding="button1" default-binding="true">
+                      <component id="9a9b3" class="javax.swing.JComboBox" binding="comboBoxSupply" custom-create="true">
                         <constraints>
-                          <splitpane position="left"/>
+                          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties/>
+                      </component>
+                      <splitpane id="3ea56" binding="splitSupplySpinner">
+                        <constraints>
+                          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
-                          <horizontalAlignment value="0"/>
-                          <text value="Button"/>
+                          <dividerLocation value="125"/>
+                          <dividerSize value="0"/>
+                          <enabled value="false"/>
+                          <resizeWeight value="0.0"/>
+                        </properties>
+                        <border type="none"/>
+                        <children>
+                          <component id="4f301" class="javax.swing.JLabel">
+                            <constraints>
+                              <splitpane position="left"/>
+                            </constraints>
+                            <properties>
+                              <horizontalAlignment value="10"/>
+                              <text value="Supply per sec:"/>
+                              <toolTipText value="15/30/45 per full yellow/red/blue/belt respectively"/>
+                            </properties>
+                          </component>
+                          <component id="905b5" class="javax.swing.JSpinner" binding="spinnerSupplyPerSec" custom-create="true">
+                            <constraints>
+                              <splitpane position="right"/>
+                            </constraints>
+                            <properties/>
+                          </component>
+                        </children>
+                      </splitpane>
+                      <component id="4d043" class="javax.swing.JButton" binding="buttonSetSupply">
+                        <constraints>
+                          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Set"/>
                         </properties>
                       </component>
-                      <component id="9b722" class="javax.swing.JButton" binding="button2" default-binding="true">
+                      <component id="1eb90" class="javax.swing.JButton" binding="buttonRemoveSupply">
                         <constraints>
-                          <splitpane position="right"/>
+                          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
                         </constraints>
                         <properties>
-                          <text value="Button"/>
+                          <text value="Remove"/>
                         </properties>
                       </component>
                     </children>
-                  </splitpane>
+                  </grid>
+                  <component id="b66f8" class="javax.swing.JButton" binding="clearSuppliesButton">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Clear All"/>
+                    </properties>
+                  </component>
                 </children>
               </grid>
             </children>
           </tabbedpane>
         </children>
       </splitpane>
-      <grid id="7682" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <component id="cb85f" class="javax.swing.JButton" binding="buttonSolve">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="100" height="-1"/>
+            <maximum-size width="100" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <horizontalAlignment value="0"/>
+          <text value="&amp;Solve"/>
+        </properties>
+      </component>
+      <grid id="7682" binding="panelConstraints" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="1" use-parent-layout="false">
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="-1" height="400"/>
           </grid>
         </constraints>
